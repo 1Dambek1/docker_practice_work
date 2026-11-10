@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Утренняя смена — кофейня</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/storefront.js" defer></script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Утренняя смена</a>
+    <a class="api-link" href="/docs">Документация API ↗</a>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Кофейня · онлайн-заказ</p>
+        <h1 id="hero-title">Кофе к открытию</h1>
+        <p class="intro">Забронируйте кофе или выпечку из утренней партии.</p>
+      </div>
+      <svg class="cup" viewBox="0 0 240 200" fill="none" aria-hidden="true">
+        <circle cx="115" cy="100" r="97" fill="#f1bd69"/>
+        <path d="M68 93h99v21a48 48 0 0 1-48 48h-3a48 48 0 0 1-48-48V93Z" fill="#fcf5e7"/>
+        <path d="M167 101h12a14 14 0 1 1 0 28h-16M62 168h112M96 76c-18-12 13-19 0-33m24 33c-18-12 13-19 0-33m24 33c-18-12 13-19 0-33" stroke="#332820" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="117.5" cy="93" rx="49.5" ry="8" fill="#332820"/>
+      </svg>
+    </section>
+
+    <section class="menu" aria-labelledby="menu-title">
+      <div class="menu-heading">
+        <div>
+          <p class="eyebrow">01 / Витрина</p>
+          <h2 id="menu-title">Сегодня в меню</h2>
+        </div>
+        <div class="menu-tools">
+          <span id="cache-state" class="badge">Кэш: —</span>
+          <button id="refresh" class="secondary" type="button">Обновить</button>
+        </div>
+      </div>
+      <p id="catalog-message" class="message" role="status"></p>
+      <p id="order-message" class="message" role="status"></p>
+      <div id="catalog" class="catalog"></div>
+    </section>
+  </main>
+
+  <template id="product-card">
+    <article class="product">
+      <span class="stock badge"></span>
+      <h3></h3>
+      <p class="description"></p>
+      <div class="product-footer">
+        <strong class="price"></strong>
+        <button type="button">Заказать</button>
+      </div>
+    </article>
+  </template>
+</body>
+</html>
