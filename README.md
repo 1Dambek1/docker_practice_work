@@ -1,6 +1,6 @@
 # Утренняя смена
 
-Практическая работа по SQLAlchemy, Alembic, Redis и Docker Compose.
+Практическая работа по SQLAlchemy, , Redis и Docker Compose.
 
 В кофейне готовят ограниченную утреннюю партию. Гость видит меню и остаток на витрине, оформляет заказ и получает подтверждение. Каждый заказ уменьшает остаток. Если последнюю порцию заказали двое одновременно, подтвердить заказ можно только одному из них.
 
@@ -20,7 +20,6 @@ python -m uvicorn main:app --reload
 ## Что сделать
 
 1. **Сохрани товары и заказы в PostgreSQL через SQLAlchemy.** Сделай две модели и свяжи заказ с товаром внешним ключом. Сохрани адреса API и поля запросов и ответов. Записывай заказ и списывай остаток в одной транзакции. Защити последнюю порцию от двух одновременных заказов. Можно выполнить условный `UPDATE` с проверкой остатка или заблокировать строку товара на время транзакции. [Транзакции в SQLAlchemy](https://docs.sqlalchemy.org/en/20/orm/session_transaction.html)
-2. **Управляй схемой через Alembic.** Настрой Alembic на метаданные моделей и добавь первую миграцию с `upgrade` и `downgrade`. Пустая БД должна быть готова к работе после `alembic upgrade head`.
 3. **Кэшируй `GET /products` в Redis.** Храни весь каталог под одним ключом, например `catalog:v1`, с TTL 60 секунд. При попадании верни заголовок `X-Cache: HIT`. При промахе прочитай PostgreSQL, заполни кэш и верни `X-Cache: MISS`. После успешного коммита `POST /products` или `POST /orders` удали ключ. Проверяй наличие порций при заказе по данным из PostgreSQL. [Документация Redis по cache-aside](https://redis.io/docs/latest/develop/use-cases/cache-aside/)
 4. **Собери запуск через Docker Compose.** Добавь `Dockerfile`, `.dockerignore` и `compose.yaml` для API, PostgreSQL и Redis. Используй именованный том для PostgreSQL. Запускай миграции после готовности базы и до старта API. Передавай `DATABASE_URL` и `REDIS_URL` через окружение и добавь `.env.example`. После `docker compose up --build` витрина должна открываться на порту 8000. [Порядок запуска сервисов в Docker Compose](https://docs.docker.com/compose/how-tos/startup-order/)
 
